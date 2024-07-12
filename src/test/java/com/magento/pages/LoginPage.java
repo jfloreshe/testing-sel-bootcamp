@@ -20,7 +20,7 @@ public class LoginPage extends BasePage{
     //Metodos o funciones
     public void fillOutForm() {
         type(usuario,"demo-pvlg");
-        type(password, "123456");
+        type(password, "demo123");
     }
 
     public void submitData() {

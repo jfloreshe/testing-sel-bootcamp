@@ -3,22 +3,19 @@ package com.magento.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.List;
 
 public class FacturaNuevaPage extends BasePage {
-    By preloader = By.id("preloader");
-    By numeroDocumentoReceptor = By.id("dniRuc");
-    By tipoDocumentoReceptor = By.id("tipoDocumentoCliente");
-    By nombreReceptor = By.id("RazonSocial");
+    By preloaderDiv = By.id("preloader");
+    By numeroDocumentoReceptorInput = By.id("dniRuc");
+    By tipoDocumentoReceptorSelectBox = By.id("tipoDocumentoCliente");
+    By nombreReceptorInput = By.id("RazonSocial");
     By buscarEntidadReceptorButton = By.xpath("/html/body/app-root/app-admin/div/div[2]/div/div/div/div/div/div/div/smrt-cntdocumentos/app-documento-factura-boleta/app-card/div/div/div/div[3]/div/div[1]/app-cabecera-documento-common/div[1]/div[1]/app-card/div/div[2]/div/form/div/div[2]/div[1]/button");
     By servicioManualButton = By.id("04010103010_btnAgregarItemmanual");
-    By descripcionItemManualModal = By.id("descripcion");
-    By aceptarButtonItemManualModal = By.xpath("/html/body/ngb-modal-window/div/div/app-agregar-item-manual/div[3]/div/div[1]/button");
+    By descripcionItemManualInputModal = By.id("descripcion");
+    By aceptarItemManualButtonModal = By.xpath("/html/body/ngb-modal-window/div/div/app-agregar-item-manual/div[3]/div/div[1]/button");
     By emitirButton = By.id("0401010302_frBusquedaItem_btnEmitir");
 
     public FacturaNuevaPage(WebDriver driver) {
@@ -26,10 +23,9 @@ public class FacturaNuevaPage extends BasePage {
     }
 
     public void fillReceptorData() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutSec));
         wait.until( d -> {
             try {
-                WebElement element = d.findElement(preloader);
+                WebElement element = d.findElement(preloaderDiv);
                 return "none".equals(element.getCssValue("display"));
             } catch (Exception ex) {
                 return true;
@@ -38,11 +34,12 @@ public class FacturaNuevaPage extends BasePage {
 
         wait.until( d -> {
             try {
-                WebElement selectElement = driver.findElement(tipoDocumentoReceptor); // Replace with your select box ID
+                WebElement selectElement = d.findElement(tipoDocumentoReceptorSelectBox);
                 Select select = new Select(selectElement);
                 List<WebElement> options = select.getOptions();
                 for(WebElement option : options) {
                     if (option.getText().equalsIgnoreCase("RUC")) {
+                        type(numeroDocumentoReceptorInput, "10721901861");
                         return true;
                     }
                 }
@@ -53,17 +50,37 @@ public class FacturaNuevaPage extends BasePage {
             }
         });
 
-        type(numeroDocumentoReceptor, "10721901861");
+
         click(buscarEntidadReceptorButton);
+
+        wait.until( d -> {
+            try{
+                WebElement element = d.findElement(nombreReceptorInput);
+                String nombreReceptorValue = element.getAttribute("value");
+                return !nombreReceptorValue.isEmpty();
+            } catch (Exception ex) {
+                return true;
+            }
+        });
     }
 
     public void fillItemManualModal() {
+        wait.until( d -> {
+            try{
+                WebElement element = d.findElement(nombreReceptorInput);
+                String nombreReceptorValue = element.getAttribute("value");
+                return !nombreReceptorValue.isEmpty();
+            } catch (Exception ex) {
+                return true;
+            }
+        });
+
         click(servicioManualButton);
-        type(descripcionItemManualModal, "Test item manual");
-        click(aceptarButtonItemManualModal);
+        type(descripcionItemManualInputModal, "Test item manual");
+        click(aceptarItemManualButtonModal);
     }
     public void emitirComprobante() {
         click(emitirButton);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
+
     }
 }

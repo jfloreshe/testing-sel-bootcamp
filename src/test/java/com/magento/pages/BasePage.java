@@ -12,7 +12,7 @@ public class BasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected int timeOutSec=10;
+    protected int timeOutSec= 30;
 
     public BasePage (WebDriver driver){
         this.driver=driver;

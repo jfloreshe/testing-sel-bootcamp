@@ -19,10 +19,6 @@ public class FacturaTest extends BaseTest{
         facturaNuevaPage.fillItemManualModal();
         facturaNuevaPage.emitirComprobante();
 
-        try{
-            Thread.sleep(3000);
-        } catch (Exception e) {
-
-        }
+        vistaPostEmisionPage.esperarCargaPdf();
     }
 }

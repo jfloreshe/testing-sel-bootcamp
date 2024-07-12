@@ -1,9 +1,6 @@
 package com.magento.tests;
 
-import com.magento.pages.FacturaNuevaPage;
-import com.magento.pages.HomePage;
-import com.magento.pages.LoginPage;
-import com.magento.pages.RegisterPage;
+import com.magento.pages.*;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -19,6 +16,7 @@ public class BaseTest {
     protected LoginPage loginPage;
     protected HomePage homePage;
     protected FacturaNuevaPage facturaNuevaPage;
+    protected VistaPostEmisionPage vistaPostEmisionPage;
     @BeforeMethod
     public void setup(){
         driver= new FirefoxDriver();//instanciando el objeto driver
@@ -26,6 +24,7 @@ public class BaseTest {
         loginPage=new LoginPage(driver);
         homePage= new HomePage(driver);
         facturaNuevaPage = new FacturaNuevaPage(driver);
+        vistaPostEmisionPage = new VistaPostEmisionPage(driver);
     }
 
     @AfterMethod
@@ -33,7 +32,6 @@ public class BaseTest {
         if (driver!=null){
             driver.quit();
         }
-
     }
 
 }
