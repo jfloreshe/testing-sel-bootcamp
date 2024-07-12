@@ -14,14 +14,14 @@ import java.time.Duration;
 public class BaseTest {
 
     protected static WebDriver driver;
-    protected RegisterPage registerPage;
+    //protected RegisterPage registerPage;
     protected LoginPage loginPage;
-    protected HomePage homePage;
+    //protected HomePage homePage;
     @BeforeMethod
     public void setup(){
         driver= new FirefoxDriver();//instanciando el objeto driver
-        homePage= new HomePage(driver);
-        registerPage=new RegisterPage(driver) ;
+        //homePage= new HomePage(driver);
+        //registerPage=new RegisterPage(driver) ;
         loginPage=new LoginPage(driver);
 
     }

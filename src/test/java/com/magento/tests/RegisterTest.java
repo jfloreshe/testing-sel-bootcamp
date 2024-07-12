@@ -22,23 +22,23 @@ public class RegisterTest extends BaseTest {
 
     }
 
-    @Test
-    public void registerNewAccountWithRequiredInformation(){
-
-        String expected_message = "Account Information";
-
-        //go to register page
-        homePage.goToRegisterLink();
-
-        //fills the form with fakedata
-        registerPage.fillOutFormWithFakeData(faker.name().firstName(),faker.name().lastName(),email,password);
-
-        //submit information
-        registerPage.submitData();
-
-        //Falta la asercion
-
-
-    }
+    //@Test
+//    public void registerNewAccountWithRequiredInformation(){
+//
+//        String expected_message = "Account Information";
+//
+//        //go to register page
+//        homePage.goToRegisterLink();
+//
+//        //fills the form with fakedata
+//        registerPage.fillOutFormWithFakeData(faker.name().firstName(),faker.name().lastName(),email,password);
+//
+//        //submit information
+//        registerPage.submitData();
+//
+//        //Falta la asercion
+//
+//
+//    }
 
 }
