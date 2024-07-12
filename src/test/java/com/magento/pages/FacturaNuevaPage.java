@@ -55,10 +55,6 @@ public class FacturaNuevaPage extends BasePage {
 
         type(numeroDocumentoReceptor, "10721901861");
         click(buscarEntidadReceptorButton);
-//        wait.until( x -> {
-//            driver.findElement(nombreReceptor).
-//            driver.findElement(nombreReceptor).isDisplayed();
-//        });
     }
 
     public void fillItemManualModal() {
