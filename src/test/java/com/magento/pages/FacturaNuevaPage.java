@@ -2,12 +2,18 @@ package com.magento.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class FacturaNuevaPage extends BasePage {
+    By preloader = By.id("preloader");
     By numeroDocumentoReceptor = By.id("dniRuc");
+    By tipoDocumentoReceptor = By.id("tipoDocumentoCliente");
     By nombreReceptor = By.id("RazonSocial");
     By buscarEntidadReceptorButton = By.xpath("/html/body/app-root/app-admin/div/div[2]/div/div/div/div/div/div/div/smrt-cntdocumentos/app-documento-factura-boleta/app-card/div/div/div/div[3]/div/div[1]/app-cabecera-documento-common/div[1]/div[1]/app-card/div/div[2]/div/form/div/div[2]/div[1]/button");
     By servicioManualButton = By.id("04010103010_btnAgregarItemmanual");
@@ -20,8 +26,34 @@ public class FacturaNuevaPage extends BasePage {
     }
 
     public void fillReceptorData() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOutSec));
+        wait.until( d -> {
+            try {
+                WebElement element = d.findElement(preloader);
+                return "none".equals(element.getCssValue("display"));
+            } catch (Exception ex) {
+                return true;
+            }
+        });
+
+        wait.until( d -> {
+            try {
+                WebElement selectElement = driver.findElement(tipoDocumentoReceptor); // Replace with your select box ID
+                Select select = new Select(selectElement);
+                List<WebElement> options = select.getOptions();
+                for(WebElement option : options) {
+                    if (option.getText().equalsIgnoreCase("RUC")) {
+                        return true;
+                    }
+                }
+
+                return false;
+            } catch (Exception ex) {
+                return true;
+            }
+        });
+
         type(numeroDocumentoReceptor, "10721901861");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
         click(buscarEntidadReceptorButton);
 //        wait.until( x -> {
 //            driver.findElement(nombreReceptor).
