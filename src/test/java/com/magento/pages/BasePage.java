@@ -10,9 +10,9 @@ import java.time.Duration;
 
 public class BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
-    int timeOutSec=10;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected int timeOutSec=10;
 
     public BasePage (WebDriver driver){
         this.driver=driver;

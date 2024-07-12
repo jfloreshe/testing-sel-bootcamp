@@ -5,7 +5,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage{
-    WebDriver driver;
 
     // Identificar los WebElementes
     By usuario = By.id("0000000002_frmLogin_inUsuario");
@@ -15,7 +14,6 @@ public class LoginPage extends BasePage{
     // Constructor
     public LoginPage(WebDriver driver) {// el drver sera pasado desde el Base test , en el metodo setUp
         super(driver);
-        this.driver=driver;
         visit(Variable.BASE_URL);
     }
 

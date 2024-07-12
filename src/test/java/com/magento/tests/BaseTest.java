@@ -1,5 +1,6 @@
 package com.magento.tests;
 
+import com.magento.pages.FacturaNuevaPage;
 import com.magento.pages.HomePage;
 import com.magento.pages.LoginPage;
 import com.magento.pages.RegisterPage;
@@ -16,14 +17,15 @@ public class BaseTest {
     protected static WebDriver driver;
     //protected RegisterPage registerPage;
     protected LoginPage loginPage;
-    //protected HomePage homePage;
+    protected HomePage homePage;
+    protected FacturaNuevaPage facturaNuevaPage;
     @BeforeMethod
     public void setup(){
         driver= new FirefoxDriver();//instanciando el objeto driver
-        //homePage= new HomePage(driver);
         //registerPage=new RegisterPage(driver) ;
         loginPage=new LoginPage(driver);
-
+        homePage= new HomePage(driver);
+        facturaNuevaPage = new FacturaNuevaPage(driver);
     }
 
     @AfterMethod
